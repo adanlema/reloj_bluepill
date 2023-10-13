@@ -14,7 +14,7 @@
 /*==================[internal data declaration]==============================*/
 static struct board_s board = {0};
 /*==================[internal functions declaration]=========================*/
-static void reloj_init(void);
+static void config_relojext_init(void);
 static void config_pin_digitos(void);
 static void config_pin_segmentos(void);
 
@@ -26,7 +26,7 @@ void        DisplayEncenderDigito(uint8_t digit);
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-static void reloj_init(void) {
+static void config_relojext_init(void) {
     RCC->CR |= RCC_CR_HSEON;
     while (!(RCC->CR & RCC_CR_HSERDY))
         continue;
@@ -74,7 +74,7 @@ void DisplayEncenderDigito(uint8_t digit) {
 board_t board_Create(void) {
 
     /*  Configuracion de pines*/
-    reloj_init();
+    config_relojext_init();
     config_pin_digitos();
     config_pin_segmentos();
     SysTick_Config(SystemCoreClock / 1000);
